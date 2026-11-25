@@ -670,9 +670,10 @@ def test_openapi_error_schemas_shape() -> None:
 
 
 def test_cookie_profile_validation_fails_fast():
+    import pytest
+
     from apipilot.asgi.options import ApiPilotOptions, CookieProfilesOptions
     from apipilot.cookie_profile import CookieProfile
-    import pytest
     bad = CookieProfile(name='auth', secure=False, http_only=True, same_site='none', path='/', domain=None)
     with pytest.raises(ValueError, match='Invalid cookie profile'):
         ApiPilotOptions(cookies=CookieProfilesOptions(auth=bad))

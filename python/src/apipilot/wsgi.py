@@ -28,6 +28,7 @@ Parsed pagination is stored on ``environ["apipilot.pagination"]``
 from __future__ import annotations
 
 import json
+import logging
 from http import HTTPStatus
 from typing import Any
 from urllib.parse import parse_qs, urlsplit
@@ -50,6 +51,8 @@ from .asgi.csrf import (
     key_ring_from_env,
 )
 from .asgi.options import SAFE_METHODS, ApiPilotOptions
+
+_log = logging.getLogger(__name__)
 
 
 class ApiPilotWSGIMiddleware:
@@ -557,8 +560,8 @@ class _SafeIterable:
         if close is not None:
             try:
                 close()
-            except Exception:
-                pass
+            except Exception:  # noqa: BLE001 - close() may raise anything; never mask the response
+                _log.debug("WSGI iterable close() raised", exc_info=True)
 
 
 class _CorrelationStartResponse:
