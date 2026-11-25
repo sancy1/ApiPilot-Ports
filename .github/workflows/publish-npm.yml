@@ -1,0 +1,53 @@
+name: Publish npm
+
+on:
+  push:
+    tags:
+      - "typescript/v*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: build + publish @apipilot/* to npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+
+      # Publish order matters: core first, then node, then the adapters.
+      # Internal deps stay as file:../x in the repo (local dev); they are
+      # rewritten to semver ranges in the publish step only.
+      - name: Publish @apipilot packages in dependency order
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -e
+          for pkg in core node fastify hono next; do
+            echo "=== publishing @apipilot/$pkg ==="
+            cd "typescript/$pkg"
+            npm ci
+            npm run build
+            # Rewrite file:../x deps to the published semver range
+            node -e '
+              const fs = require("fs");
+              const path = require("path");
+              const p = JSON.parse(fs.readFileSync("package.json", "utf8"));
+              for (const [k, v] of Object.entries(p.dependencies || {})) {
+                if (typeof v === "string" && v.startsWith("file:")) {
+                  const depPkg = JSON.parse(
+                    fs.readFileSync(path.join(v.slice(5), "package.json"), "utf8")
+                  );
+                  p.dependencies[k] = "^" + depPkg.version;
+                }
+              }
+              fs.writeFileSync("package.json", JSON.stringify(p, null, 2) + "\n");
+            '
+            npm publish --access public
+            cd - > /dev/null
+          done
