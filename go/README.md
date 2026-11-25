@@ -3,19 +3,19 @@
 ApiPilot for Go — a behavioral port of the C# ApiPilot library with exact
 wire-contract parity. Two packages:
 
-- **`core`** (`github.com/apipilot/go/core`) — pure logic: envelopes, error
+- **`core`** (`github.com/sancy1/ApiPilot-Ports/go/core`) — pure logic: envelopes, error
   codes, pagination, validation keys, origin parsing, fetch metadata, cookie
   profiles, CSRF token format + binding fingerprint, correlation ID, content
   negotiation.
-- **`httpapi`** (`github.com/apipilot/go/httpapi`) — `net/http` adapter:
+- **`httpapi`** (`github.com/sancy1/ApiPilot-Ports/go/httpapi`) — `net/http` adapter:
   middleware pipeline, CSRF protection (AES-256-GCM), envelope response
   helpers, exception mapping.
 
 ## Installation
 
 ```sh
-go get github.com/apipilot/go/core
-go get github.com/apipilot/go/httpapi
+go get github.com/sancy1/ApiPilot-Ports/go/core
+go get github.com/sancy1/ApiPilot-Ports/go/httpapi
 ```
 
 ## Quick start
@@ -26,8 +26,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/apipilot/go/core"
-	"github.com/apipilot/go/httpapi"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/httpapi"
 )
 
 func main() {
@@ -164,5 +164,5 @@ Adapter integration tests:
 
 ```sh
 go test ./httpapi/
-# ok  github.com/apipilot/go/httpapi
+# ok  github.com/sancy1/ApiPilot-Ports/go/httpapi
 ```

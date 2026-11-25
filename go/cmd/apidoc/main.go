@@ -5,8 +5,8 @@
 //
 // Usage: go run ./cmd/apidoc [-out docs/api] [packages...]
 //
-// With no packages, it documents github.com/apipilot/go/core and
-// github.com/apipilot/go/httpapi.
+// With no packages, it documents github.com/sancy1/ApiPilot-Ports/go/core and
+// github.com/sancy1/ApiPilot-Ports/go/httpapi.
 package main
 
 import (

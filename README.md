@@ -26,8 +26,8 @@ ApiPilot-Ports/
 │   └── src/apipilot/ — core package + asgi/ adapter (FastAPI, Starlette,
 │                       Django-ASGI, any ASGI framework)
 └── go/
-    ├── core/        github.com/apipilot/go/core    — pure logic
-    └── httpapi/     github.com/apipilot/go/httpapi — net/http adapter
+    ├── core/        github.com/sancy1/ApiPilot-Ports/go/core    — pure logic
+    └── httpapi/     github.com/sancy1/ApiPilot-Ports/go/httpapi — net/http adapter
 ```
 
 ## Conformance

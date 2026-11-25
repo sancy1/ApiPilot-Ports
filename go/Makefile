@@ -33,10 +33,10 @@ docs:
 	@for pkg in core httpapi; do \
 		echo "## Package \`$$pkg\`" >> docs/api-reference.md; \
 		echo "" >> docs/api-reference.md; \
-		$(GO) doc github.com/apipilot/go/$$pkg >> docs/api-reference.md; \
+		$(GO) doc github.com/sancy1/ApiPilot-Ports/go/$$pkg >> docs/api-reference.md; \
 		echo "" >> docs/api-reference.md; \
 	done
-	@echo "Generated $$($(GO) doc github.com/apipilot/go/core | wc -l) lines of core docs." >&2
+	@echo "Generated $$($(GO) doc github.com/sancy1/ApiPilot-Ports/go/core | wc -l) lines of core docs." >&2
 
 apidocs:
 	$(GO) run ./cmd/apidoc -out docs/api

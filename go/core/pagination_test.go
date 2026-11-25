@@ -3,7 +3,7 @@ package core_test
 import (
 	"testing"
 
-	"github.com/apipilot/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
 )
 
 // ---------------------------------------------------------------------------

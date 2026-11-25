@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/apipilot/go/core"
-	"github.com/apipilot/go/httpapi"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/httpapi"
 )
 
 func testKeyRing(t *testing.T) *httpapi.CsrfKeyRing {

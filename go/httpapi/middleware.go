@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/apipilot/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
 )
 
 // Middleware implements the ApiPilot request pipeline as net/http middleware.

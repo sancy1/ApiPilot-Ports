@@ -1,7 +1,7 @@
 # ApiPilot Go documentation
 
 Per-concern documentation for the Go port of ApiPilot
-(`github.com/apipilot/go`). The wire contract is identical to the C#
+(`github.com/sancy1/ApiPilot-Ports/go`). The wire contract is identical to the C#
 library and the TypeScript/Python ports — see `SPEC.md` in the
 repository root for the normative contract.
 

@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/apipilot/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
 )
 
 // CSRF protection — protector, key ring, service, binding.

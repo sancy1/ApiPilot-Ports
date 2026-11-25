@@ -3,7 +3,7 @@ package httpapi
 import (
 	"net/http"
 
-	"github.com/apipilot/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
 )
 
 // SafeMethods are the HTTP methods that skip origin/fetch-metadata/CSRF checks.

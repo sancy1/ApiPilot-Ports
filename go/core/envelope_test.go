@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/apipilot/go/core"
+	"github.com/sancy1/ApiPilot-Ports/go/core"
 )
 
 func strPtr(s string) *string { return &s }
