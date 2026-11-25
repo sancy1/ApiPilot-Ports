@@ -5,6 +5,37 @@ Every port implements the same wire contract — verified by a shared set of
 **107 conformance vectors / 251 assertions** that all four implementations
 (C#, TypeScript, Python, Go) pass identically.
 
+## Published packages
+
+| Port | Package | Registry | Version | Install |
+|---|---|---|---|---|
+| Go | `github.com/sancy1/ApiPilot-Ports/go/core` + `/httpapi` | [pkg.go.dev](https://pkg.go.dev/github.com/sancy1/ApiPilot-Ports/go@v0.1.1) | `v0.1.1` | `go get github.com/sancy1/ApiPilot-Ports/go/httpapi@v0.1.1` |
+| Python | `apipilot` | [PyPI](https://pypi.org/project/apipilot/) | `0.1.0` | `pip install apipilot` (`[asgi]` / `[wsgi]` extras) |
+| TypeScript | `@apipilot/core` | [npm](https://www.npmjs.com/package/@apipilot/core) | `0.1.0` | `npm install @apipilot/core` |
+| TypeScript | `@apipilot/node` (Express/Connect/raw Node) | [npm](https://www.npmjs.com/package/@apipilot/node) | `0.1.0` | `npm install @apipilot/node` |
+| TypeScript | `@apipilot/fastify` | [npm](https://www.npmjs.com/package/@apipilot/fastify) | `0.1.0` | `npm install @apipilot/fastify` |
+| TypeScript | `@apipilot/hono` | [npm](https://www.npmjs.com/package/@apipilot/hono) | `0.1.0` | `npm install @apipilot/hono` |
+| TypeScript | `@apipilot/next` (Next.js App Router) | [npm](https://www.npmjs.com/package/@apipilot/next) | `0.1.0` | `npm install @apipilot/next` |
+
+## Documentation
+
+Auto-generated API docs are deployed to **GitHub Pages** on every push to `main`
+(`.github/workflows/pages.yml`):
+
+| Port | Docs | Generator |
+|---|---|---|
+| All ports index | https://sancy1.github.io/ApiPilot-Ports/ | — |
+| TypeScript core | https://sancy1.github.io/ApiPilot-Ports/typescript/core/ | TypeDoc |
+| TypeScript node | https://sancy1.github.io/ApiPilot-Ports/typescript/node/ | TypeDoc |
+| TypeScript fastify | https://sancy1.github.io/ApiPilot-Ports/typescript/fastify/ | TypeDoc |
+| TypeScript hono | https://sancy1.github.io/ApiPilot-Ports/typescript/hono/ | TypeDoc |
+| TypeScript next | https://sancy1.github.io/ApiPilot-Ports/typescript/next/ | TypeDoc |
+| Python | https://sancy1.github.io/ApiPilot-Ports/python/ | Sphinx |
+| Go | https://pkg.go.dev/github.com/sancy1/ApiPilot-Ports/go@v0.1.1 | `go doc` / pkg.go.dev |
+
+Hand-written guides live in each port's `docs/` directory (pagination, CSRF,
+correlation, origin policy, fetch metadata, OpenAPI, filtering/sorting, …).
+
 ## Layout
 
 ```
