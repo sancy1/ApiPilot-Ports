@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ApiPilot generic Node adapter: Connect/Express-style middleware over node:http. Works with Express, NestJS (Express), polka, and raw Node http. Framework adapter over @apipilot/core.",
   "license": "Apache-2.0",
   "type": "module",
@@ -33,5 +33,12 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sancy1/ApiPilot-Ports.git",
+    "directory": "typescript/node"
+  },
+  "homepage": "https://sancy1.github.io/ApiPilot-Ports/typescript/node/",
+  "bugs": "https://github.com/sancy1/ApiPilot-Ports/issues"
 }

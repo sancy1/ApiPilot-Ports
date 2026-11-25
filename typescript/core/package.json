@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ApiPilot framework-neutral core: envelopes, error codes, pagination, validation keys, origin, fetch-metadata, cookie rules, CSRF format and binding. Zero runtime dependencies.",
   "license": "Apache-2.0",
   "type": "module",
@@ -12,7 +12,11 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node --test \"test/**/*.mjs\"",
@@ -26,5 +30,12 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sancy1/ApiPilot-Ports.git",
+    "directory": "typescript/core"
+  },
+  "homepage": "https://sancy1.github.io/ApiPilot-Ports/typescript/core/",
+  "bugs": "https://github.com/sancy1/ApiPilot-Ports/issues"
 }

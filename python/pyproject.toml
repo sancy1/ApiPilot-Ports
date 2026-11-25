@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "apipilot"
-version = "0.1.0"
+version = "0.1.1"
 description = "ApiPilot for Python — framework-neutral core plus ASGI adapter. Envelopes, error codes, pagination, validation keys, origin, fetch-metadata, cookie rules, CSRF."
 readme = "README.md"
 license = { text = "Apache-2.0" }

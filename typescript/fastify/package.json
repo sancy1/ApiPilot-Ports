@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/fastify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ApiPilot Fastify adapter: middleware, CSRF protection, envelopes, pagination, validation, content negotiation, origin and fetch-metadata policies. Framework adapter over @apipilot/core.",
   "license": "Apache-2.0",
   "type": "module",
@@ -36,5 +36,12 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sancy1/ApiPilot-Ports.git",
+    "directory": "typescript/fastify"
+  },
+  "homepage": "https://sancy1.github.io/ApiPilot-Ports/typescript/fastify/",
+  "bugs": "https://github.com/sancy1/ApiPilot-Ports/issues"
 }
