@@ -11,6 +11,11 @@ license = { text = "Apache-2.0" }
 requires-python = ">=3.10"
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/sancy1/ApiPilot-Ports"
+Documentation = "https://sancy1.github.io/ApiPilot-Ports/python/"
+Repository = "https://github.com/sancy1/ApiPilot-Ports"
+
 [project.optional-dependencies]
 asgi = ["fastapi>=0.110", "starlette>=0.37", "cryptography>=42"]
 wsgi = ["cryptography>=42"]
