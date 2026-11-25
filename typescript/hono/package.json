@@ -1,0 +1,42 @@
+{
+  "name": "@apipilot/hono",
+  "version": "0.1.0",
+  "description": "ApiPilot Hono adapter: full request pipeline (correlation, rate-limit, content negotiation, origin, fetch-metadata, CSRF, pagination, exception mapping) as Hono middleware. Works with Hono on Node, Bun, Deno, and Cloudflare Workers.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/hono.test.mjs test/consumer.test.mjs",
+    "docs:api": "typedoc"
+  },
+  "dependencies": {
+    "@apipilot/core": "file:../core",
+    "@apipilot/node": "file:../node"
+  },
+  "peerDependencies": {
+    "hono": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^1.13.0",
+    "@types/node": "^22.0.0",
+    "hono": "^4.6.0",
+    "typedoc": "^0.28.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

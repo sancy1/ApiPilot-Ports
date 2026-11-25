@@ -1,0 +1,40 @@
+{
+  "name": "@apipilot/fastify",
+  "version": "0.1.0",
+  "description": "ApiPilot Fastify adapter: middleware, CSRF protection, envelopes, pagination, validation, content negotiation, origin and fetch-metadata policies. Framework adapter over @apipilot/core.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test test/integration.mjs test/extras.mjs test/consumer.mjs",
+    "conformance": "node ../core/test/conformance.mjs",
+    "docs": "node scripts/gen-api-docs.mjs",
+    "docs:api": "typedoc"
+  },
+  "dependencies": {
+    "@apipilot/core": "file:../core",
+    "fastify": "^5.0.0",
+    "fastify-plugin": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typedoc": "^0.28.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

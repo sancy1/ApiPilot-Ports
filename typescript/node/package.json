@@ -1,0 +1,37 @@
+{
+  "name": "@apipilot/node",
+  "version": "0.1.0",
+  "description": "ApiPilot generic Node adapter: Connect/Express-style middleware over node:http. Works with Express, NestJS (Express), polka, and raw Node http. Framework adapter over @apipilot/core.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/node.test.mjs test/conformance-adapter.mjs test/consumer.test.mjs",
+    "conformance": "node ../core/test/conformance.mjs && node --test test/conformance-adapter.mjs",
+    "docs:api": "typedoc"
+  },
+  "dependencies": {
+    "@apipilot/core": "file:../core"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typedoc": "^0.28.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

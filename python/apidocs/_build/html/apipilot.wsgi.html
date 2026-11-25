@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>apipilot.wsgi module &#8212; ApiPilot (Python) 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="apipilot.asgi package" href="apipilot.asgi.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="apipilot-wsgi-module">
+<h1>apipilot.wsgi module<a class="headerlink" href="#apipilot-wsgi-module" title="Link to this heading">¶</a></h1>
+<p>WSGI middleware implementing the same ApiPilot pipeline for Flask,
+Django (WSGI), Bottle, Pyramid, and any WSGI framework.</p>
+<p id="module-apipilot.wsgi">ApiPilotWSGIMiddleware — WSGI binding for ApiPilot.</p>
+<p>Pure WSGI middleware implementing the same pipeline as the ASGI adapter:
+correlation → rate-limit → content-negotiation → origin → fetch-metadata
+→ CSRF → pagination → exception mapping.</p>
+<p>Works with Flask, Django (WSGI), Bottle, Pyramid, and any WSGI framework:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flask</span>
+<span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">ApiPilotWSGIMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">,</span> <span class="n">options</span><span class="o">=...</span><span class="p">)</span>
+
+<span class="c1"># Django (WSGI)</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">ApiPilotWSGIMiddleware</span><span class="p">(</span><span class="n">get_wsgi_application</span><span class="p">(),</span> <span class="n">options</span><span class="o">=...</span><span class="p">)</span>
+
+<span class="c1"># Raw WSGI</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">ApiPilotWSGIMiddleware</span><span class="p">(</span><span class="n">my_wsgi_app</span><span class="p">,</span> <span class="n">options</span><span class="o">=...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The middleware builds an ASGI-compatible scope dict from the WSGI
+environ, so the same <code class="docutils literal notranslate"><span class="pre">DefaultCsrfBindingResolver</span></code> extractors and
+<code class="docutils literal notranslate"><span class="pre">rate_limit.key_extractor</span></code> callables work unchanged — they receive a
+dict with <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code>, <code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">query_string</span></code>, <code class="docutils literal notranslate"><span class="pre">headers</span></code>
+(list of <code class="docutils literal notranslate"><span class="pre">(bytes,</span> <span class="pre">bytes)</span></code>), and <code class="docutils literal notranslate"><span class="pre">client</span></code>.</p>
+<p>Parsed pagination is stored on <code class="docutils literal notranslate"><span class="pre">environ[&quot;apipilot.pagination&quot;]</span></code>
+(mirrors <code class="docutils literal notranslate"><span class="pre">scope[&quot;apipilot.pagination&quot;]</span></code> in the ASGI adapter).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="apipilot.wsgi.ApiPilotWSGIMiddleware">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apipilot.wsgi.</span></span><span class="sig-name descname"><span class="pre">ApiPilotWSGIMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="apipilot.asgi.html#apipilot.asgi.ApiPilotOptions" title="apipilot.asgi.options.ApiPilotOptions"><span class="pre">ApiPilotOptions</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csrf_key_ring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="apipilot.asgi.html#apipilot.asgi.CsrfKeyRing" title="apipilot.asgi.csrf.CsrfKeyRing"><span class="pre">CsrfKeyRing</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csrf_binding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="apipilot.asgi.html#apipilot.asgi.DefaultCsrfBindingResolver" title="apipilot.asgi.csrf.DefaultCsrfBindingResolver"><span class="pre">DefaultCsrfBindingResolver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/apipilot/wsgi.html#ApiPilotWSGIMiddleware"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apipilot.wsgi.ApiPilotWSGIMiddleware" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>WSGI middleware applying the ApiPilot request pipeline.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">application</span> <span class="o">=</span> <span class="n">ApiPilotWSGIMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">ApiPilotOptions</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ApiPilot (Python)</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="apipilot.html">apipilot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipilot.asgi.html">apipilot.asgi package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">apipilot.wsgi module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#apipilot.wsgi.ApiPilotWSGIMiddleware"><code class="docutils literal notranslate"><span class="pre">ApiPilotWSGIMiddleware</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="apipilot.asgi.html" title="previous chapter">apipilot.asgi package</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, ApiPilot contributors.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/apipilot.wsgi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

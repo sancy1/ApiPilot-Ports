@@ -1,0 +1,16 @@
+{
+  "name": "@apipilot/node-examples",
+  "private": true,
+  "type": "module",
+  "description": "Runnable examples for @apipilot/node — Express and raw node:http.",
+  "scripts": {
+    "express": "node express-server.mjs",
+    "raw": "node raw-server.mjs",
+    "koa": "node koa-server.mjs"
+  },
+  "dependencies": {
+    "@apipilot/node": "file:..",
+    "express": "^4.21.0",
+    "koa": "^2.15.0"
+  }
+}
