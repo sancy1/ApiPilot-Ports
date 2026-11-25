@@ -8,6 +8,10 @@ dist/
 build/
 *.tsbuildinfo
 
+# Generated API docs (deployed to GitHub Pages, not committed)
+typescript/*/apidocs/
+python/apidocs/_build/
+
 # Python
 __pycache__/
 *.py[cod]
