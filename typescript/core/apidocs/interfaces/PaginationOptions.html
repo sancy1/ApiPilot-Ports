@@ -15,7 +15,7 @@
 </div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">PaginationOptions</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#defaultpagesize">defaultPageSize</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#integerparser">integerParser</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">raw</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#isfilterparameter">isFilterParameter</a><span class="tsd-signature-symbol">:</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">boolean</span>) <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#maxpagesize">maxPageSize</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#pagenumberbase">pageNumberBase</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#parameternames">parameterNames</a><span class="tsd-signature-symbol">:</span> <a href="PaginationParameterNames.html" class="tsd-signature-type tsd-kind-interface">PaginationParameterNames</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#sortdirectionparser">sortDirectionParser</a><span class="tsd-signature-symbol">:</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">raw</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <a href="../types/SortDirection.html" class="tsd-signature-type tsd-kind-type-alias">SortDirection</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span>) <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#sortparser">sortParser</a><span class="tsd-signature-symbol">:</span><br/>        <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">field</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">direction</span><span class="tsd-signature-symbol">:</span> <a href="../types/SortDirection.html" class="tsd-signature-type tsd-kind-type-alias">SortDirection</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <a href="SortRequest.html" class="tsd-signature-type tsd-kind-interface">SortRequest</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span>)<br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#strictqueryvalidation">strictQueryValidation</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#successstatuscode">successStatusCode</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:29</li></ul></aside>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L29">pagination.ts:29</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -43,70 +43,70 @@
 <div class="tsd-comment tsd-typography"><p>T1: default page size when query omits pageSize. Default 20.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:31</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L31">pagination.ts:31</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="integerparser"><span>integer<wbr/>Parser</span><a href="#integerparser" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">integerParser</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">raw</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
 <div class="tsd-comment tsd-typography"><p>T7: integer parser for page/pageSize.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:43</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L43">pagination.ts:43</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="isfilterparameter"><span>is<wbr/>Filter<wbr/>Parameter</span><a href="#isfilterparameter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">isFilterParameter</span><span class="tsd-signature-symbol">:</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">boolean</span>) <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
 <div class="tsd-comment tsd-typography"><p>T10: filter predicate — is this query param a filter? null = lenient (all non-control).</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:49</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L49">pagination.ts:49</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="maxpagesize"><span>max<wbr/>Page<wbr/>Size</span><a href="#maxpagesize" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">maxPageSize</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>T2: maximum allowed page size. Default 100.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:33</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L33">pagination.ts:33</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="pagenumberbase"><span>page<wbr/>Number<wbr/>Base</span><a href="#pagenumberbase" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">pageNumberBase</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>T3: wire page-number base. Default 1. Internal PageRequest is always 1-based.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:35</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L35">pagination.ts:35</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="parameternames"><span>parameter<wbr/>Names</span><a href="#parameternames" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">parameterNames</span><span class="tsd-signature-symbol">:</span> <a href="PaginationParameterNames.html" class="tsd-signature-type tsd-kind-interface">PaginationParameterNames</a></div>
 <div class="tsd-comment tsd-typography"><p>T6: parameter names.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:41</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L41">pagination.ts:41</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="sortdirectionparser"><span>sort<wbr/>Direction<wbr/>Parser</span><a href="#sortdirectionparser" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">sortDirectionParser</span><span class="tsd-signature-symbol">:</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">raw</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <a href="../types/SortDirection.html" class="tsd-signature-type tsd-kind-type-alias">SortDirection</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span>) <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
 <div class="tsd-comment tsd-typography"><p>T9: direction parser — raw token → SortDirection or null.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:47</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L47">pagination.ts:47</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="sortparser"><span>sort<wbr/>Parser</span><a href="#sortparser" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">sortParser</span><span class="tsd-signature-symbol">:</span><br/>    <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">field</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">direction</span><span class="tsd-signature-symbol">:</span> <a href="../types/SortDirection.html" class="tsd-signature-type tsd-kind-type-alias">SortDirection</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <a href="SortRequest.html" class="tsd-signature-type tsd-kind-interface">SortRequest</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span>)<br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
 <div class="tsd-comment tsd-typography"><p>T8: sort parser — field+direction → SortRequest or null.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:45</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L45">pagination.ts:45</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="strictqueryvalidation"><span>strict<wbr/>Query<wbr/>Validation</span><a href="#strictqueryvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">strictQueryValidation</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>T5: strict query validation — reject unrecognized params. Default false.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:39</li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L39">pagination.ts:39</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="successstatuscode"><span>success<wbr/>Status<wbr/>Code</span><a href="#successstatuscode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">successStatusCode</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>T4: HTTP status for successful paginated responses. Default 200.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in pagination.ts:37</li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/sancy1/ApiPilot-Ports/blob/9fc8df7caa887306afaf81bd0ed37113e68fbef8/typescript/core/src/pagination.ts#L37">pagination.ts:37</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
