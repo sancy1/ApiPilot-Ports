@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ApiPilot framework-neutral core: envelopes, error codes, pagination, validation keys, origin, fetch-metadata, cookie rules, CSRF format and binding. Zero runtime dependencies.",
   "license": "Apache-2.0",
   "type": "module",

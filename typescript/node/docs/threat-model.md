@@ -15,7 +15,7 @@
 | Origin bypass | Exact origin matching; Referer fallback only when Origin absent; `requireOriginHeader` option. |
 | Fetch-metadata bypass | `allowMissingHeaders=false` for browser-only APIs; strict value allowlists. |
 | Cookie tossing | `SameSite=None` requires `Secure`; profile validation on session cookies. |
-| Log injection | Correlation ID validated against `validationPattern` or replaced. |
+| Log injection | Correlation ID validated against `validationPattern`; `invalidIdPolicy` chooses replace / reject / use-as-is. |
 | Rate-limit bypass | Per-key fixed window; `keyExtractor` for API-key-aware limiting. |
 | Key compromise | `CsrfKeyRing` supports multiple keys for rotation; keys from env, never in code. |
 

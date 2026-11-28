@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/fastify",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ApiPilot Fastify adapter: middleware, CSRF protection, envelopes, pagination, validation, content negotiation, origin and fetch-metadata policies. Framework adapter over @apipilot/core.",
   "license": "Apache-2.0",
   "type": "module",

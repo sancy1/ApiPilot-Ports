@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/next",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ApiPilot Next.js adapter: full request pipeline for App Router route handlers (web Request/Response) plus Pages Router support via the node adapter. Envelopes, CSRF, pagination, origin, rate limiting, exception mapping.",
   "license": "Apache-2.0",
   "type": "module",

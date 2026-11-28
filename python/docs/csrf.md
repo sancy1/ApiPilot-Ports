@@ -1,15 +1,18 @@
 # CSRF protection
 
-ApiPilot CSRF uses a double-submit pattern: a bootstrap endpoint issues an
-HMAC-protected token; unsafe requests must echo it in a header.
+ApiPilot CSRF uses a synchronizer-token pattern: a bootstrap endpoint issues an
+AES-256-GCM encrypted token; unsafe requests must echo it in a header.
 
 ## Token format
 
+The wire token is AES-256-GCM encrypted (`CsrfProtector`), mirroring
+ASP.NET Data Protection:
+
 ```
-<base64url(payload)>.<base64url(hmac-sha256)>
+v1.<keyId>.<iv>.<ciphertext>.<tag>   (each segment base64url)
 ```
 
-Payload (pipe-delimited, `encode_csrf_payload`):
+The decrypted payload is pipe-delimited (`encode_csrf_payload`):
 
 ```
 <issuedAtUnixSeconds>|<randomBase64Url>|<bindingFingerprint>
@@ -18,15 +21,17 @@ Payload (pipe-delimited, `encode_csrf_payload`):
 - `issuedAtUnixSeconds` — integer seconds since epoch.
 - `randomBase64Url` — CSPRNG entropy (`token_entropy_bytes`, default 32).
 - `bindingFingerprint` — `csrf_binding_fingerprint(source, kind)`,
-  a truncated SHA-256 over `ApiPilot.Csrf.Binding.v1|kind|source`.
+  a SHA-256 over `ApiPilot.Csrf.Binding.v1|kind|source`.
+- `keyId` selects the key-ring entry that sealed the token, enabling
+  rotation without invalidating in-flight tokens.
 
 ## Binding resolution
 
-`DefaultCsrfBindingResolver` resolves in order — never anonymous:
+`DefaultCsrfBindingResolver` resolves in order â€” never anonymous:
 
-1. **subject** — authenticated user id (`subject_extractor`).
-2. **session** — session id (`session_extractor`).
-3. **preauth** — pre-auth source such as a device fingerprint
+1. **subject** â€” authenticated user id (`subject_extractor`).
+2. **session** â€” session id (`session_extractor`).
+3. **preauth** â€” pre-auth source such as a device fingerprint
    (`pre_auth_source`).
 
 If all resolve to empty, the binding is `None` and CSRF **fails closed**
@@ -34,14 +39,14 @@ If all resolve to empty, the binding is `None` and CSRF **fails closed**
 
 ## Pipeline
 
-1. `GET <bootstrap_path>` (default `/api/csrf`) → issues
+1. `GET <bootstrap_path>` (default `/api/csrf`) â†’ issues
    `{ "success": true, "data": { "token": "..." } }` with
    `Cache-Control: no-store`.
 2. Unsafe methods (`POST`/`PUT`/`PATCH`/`DELETE` by default) require the
    token in `header_name` (default `X-CSRF-Token`).
 3. The bootstrap path is **exempt** from validation on every method.
 
-## Validation outcomes → codes
+## Validation outcomes â†’ codes
 
 | Outcome | Code |
 | --- | --- |
@@ -84,14 +89,14 @@ csrf_extras.attach_rotation_store(service, store)
 ```
 
 `RotationStore` is a protocol (`get_rotation_marker`,
-`set_rotation_marker`, `clear_rotation_marker`) � back it with Redis
+`set_rotation_marker`, `clear_rotation_marker`) — back it with Redis
 or a database for multi-instance deployments.
 `csrf_extras.mark_rotated(service, fingerprint)` records a marker.
 
 ## Transition listener (`CsrfTransitionListener`)
 
 Issues a fresh token on login and clears the rotation marker on logout.
-Never authenticates users or writes cookies � the application owns its
+Never authenticates users or writes cookies — the application owns its
 session lifecycle.
 
 ```python
@@ -116,15 +121,15 @@ policy = csrf_extras.resolve_endpoint_policy(require_csrf, skip_csrf)
 
 `CsrfOptions.rotation_policy` mirrors `CsrfRotationPolicy` (C#):
 
-- `"onBootstrap"` (default) — bootstrap records a rotation marker; tokens
+- `"onBootstrap"` (default) â€” bootstrap records a rotation marker; tokens
   issued before the latest bootstrap validate as `"rotated"`.
-- `"onWindow"` — same marker semantics; reserved for window-based rotation.
-- `"never"` — no marker is recorded; all unexpired tokens stay valid.
+- `"onWindow"` â€” same marker semantics; reserved for window-based rotation.
+- `"never"` â€” no marker is recorded; all unexpired tokens stay valid.
 
 `CsrfOptions.rotation_requirement` mirrors `CsrfRotationRequirement` (C#):
 
-- `"optional"` (default) — store may be omitted; rotation checks are skipped.
-- `"required"` — `ApiPilotASGIMiddleware` raises `ValueError` at startup
+- `"optional"` (default) â€” store may be omitted; rotation checks are skipped.
+- `"required"` â€” `ApiPilotASGIMiddleware` raises `ValueError` at startup
   when `rotation_store` is `None`, failing fast.
 
 When a store is configured, `CsrfService.validate_token` returns outcome

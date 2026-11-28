@@ -1,6 +1,6 @@
 # CSRF protection
 
-ApiPilot CSRF uses a double-submit pattern: a bootstrap endpoint issues an
+ApiPilot CSRF uses a synchronizer-token pattern: a bootstrap endpoint issues an
 encrypted token; unsafe requests must echo it in a header.
 
 ## Token format
@@ -21,7 +21,7 @@ The decrypted payload is pipe-delimited (`encodeCsrfPayload`):
 - `issuedAtUnixSeconds` — integer seconds since epoch.
 - `randomBase64Url` — CSPRNG entropy.
 - `bindingFingerprint` — `csrfBindingFingerprint(source, kind)`,
-  a truncated SHA-256 over `ApiPilot.Csrf.Binding.v1|kind|source`.
+  a SHA-256 over `ApiPilot.Csrf.Binding.v1|kind|source`.
 - `keyId` selects the key-ring entry that sealed the token, enabling
   rotation without invalidating in-flight tokens.
 

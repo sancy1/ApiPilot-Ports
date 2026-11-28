@@ -13,6 +13,13 @@ ApiPilot responses are JSON. The envelope keys are pinned; application
 The Go adapter marshals with `encoding/json`; struct tags control field
 names. `CamelCase=false` emits Go field names verbatim.
 
+**HTML escaping is disabled** (`SetEscapeHTML(false)`) so payloads are not
+mangled (`<`, `>`, `&` are emitted verbatim, matching `System.Text.Json`
+defaults on other ports). If you embed ApiPilot JSON inside HTML — e.g.
+`<script type="application/json">` blocks or inline JS — you MUST escape it
+yourself or rely on a strict CSP; otherwise user-controlled strings could
+become an XSS vector.
+
 ## Enum serialization
 
 Go has no enum type; applications serialize enums as strings or numbers

@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/hono",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ApiPilot Hono adapter: full request pipeline (correlation, rate-limit, content negotiation, origin, fetch-metadata, CSRF, pagination, exception mapping) as Hono middleware. Works with Hono on Node, Bun, Deno, and Cloudflare Workers.",
   "license": "Apache-2.0",
   "type": "module",

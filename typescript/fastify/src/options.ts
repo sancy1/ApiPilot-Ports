@@ -49,7 +49,7 @@ export const DEFAULT_ORIGIN_POLICY_OPTIONS: OriginPolicyOptions = {
   allowedOrigins: [],
   matchMode: "exact",
   allowRefererFallback: true,
-  requireOriginHeader: false,
+  requireOriginHeader: true,
 };
 
 /** CSRF options — mirrors CsrfOptions (C#). */

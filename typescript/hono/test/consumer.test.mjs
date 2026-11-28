@@ -109,7 +109,11 @@ test("S6: CSRF bootstrap → protected POST flow", async () => {
 
   const noToken = await app.request("/echo", {
     method: "POST",
-    headers: { ...session, "content-type": "application/json" },
+    headers: {
+      ...session,
+      origin: "https://app.example.com",
+      "content-type": "application/json",
+    },
     body: "{}",
   });
   assert.equal(noToken.status, 403);
@@ -119,6 +123,7 @@ test("S6: CSRF bootstrap → protected POST flow", async () => {
     method: "POST",
     headers: {
       ...session,
+      origin: "https://app.example.com",
       "content-type": "application/json",
       "x-csrf-token": token,
     },
@@ -132,6 +137,7 @@ test("S7: Sec-Fetch-Site cross-site → rejected (strict)", async () => {
     method: "POST",
     headers: {
       ...session,
+      origin: "https://app.example.com",
       "sec-fetch-site": "cross-site",
       "content-type": "application/json",
     },

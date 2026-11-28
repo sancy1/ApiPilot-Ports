@@ -10,12 +10,12 @@
 
 | Threat | Mitigation |
 | --- | --- |
-| CSRF | Double-submit HMAC token bound to subject/session/preauth; origin + fetch-metadata + cookie policy defense-in-depth. |
+| CSRF | AES-256-GCM encrypted synchronizer token bound to subject/session/preauth; origin + fetch-metadata + cookie policy defense-in-depth. |
 | Token replay | Binding fingerprint changes on identity change; `TokenLifetimeSeconds` expiry. |
 | Origin bypass | Exact origin matching; Referer fallback only when Origin absent; `RequireOriginHeader` option. |
 | Fetch-metadata bypass | `AllowMissingHeaders=false` for browser-only APIs; strict value allowlists. |
 | Cookie tossing | `SameSite=None` requires `Secure`; profile validation on session cookies. |
-| Log injection | Correlation ID validated against `ValidationPattern` or replaced. |
+| Log injection | Correlation ID validated against `ValidationPattern`; `InvalidIdPolicy` chooses replace / reject / use-as-is. |
 | Rate-limit bypass | Per-key fixed window; `KeyExtractor` for API-key-aware limiting. |
 | Key compromise | `CsrfKeyRing` supports multiple keys for rotation; keys from env, never in code. |
 

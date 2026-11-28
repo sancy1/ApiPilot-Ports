@@ -1,15 +1,18 @@
 # CSRF protection
 
-ApiPilot CSRF uses a double-submit pattern: a bootstrap endpoint issues an
-HMAC-protected token; unsafe requests must echo it in a header.
+ApiPilot CSRF uses a synchronizer-token pattern: a bootstrap endpoint issues an
+AES-256-GCM encrypted token; unsafe requests must echo it in a header.
 
 ## Token format
 
+The wire token is AES-256-GCM encrypted (`CsrfProtector`), mirroring
+ASP.NET Data Protection:
+
 ```
-<base64url(payload)>.<base64url(hmac-sha256)>
+v1.<keyId>.<iv>.<ciphertext>.<tag>   (each segment base64url)
 ```
 
-Payload (pipe-delimited, `core.EncodeCsrfPayload`):
+The decrypted payload is pipe-delimited (`core.EncodeCsrfPayload`):
 
 ```
 <issuedAtUnixSeconds>|<randomBase64Url>|<bindingFingerprint>
@@ -18,15 +21,17 @@ Payload (pipe-delimited, `core.EncodeCsrfPayload`):
 - `issuedAtUnixSeconds` — integer seconds since epoch.
 - `randomBase64Url` — CSPRNG entropy (`TokenEntropyBytes`, default 32).
 - `bindingFingerprint` — `core.CsrfBindingFingerprint(source, kind)`,
-  a truncated SHA-256 over `ApiPilot.Csrf.Binding.v1|kind|source`.
+  a SHA-256 over `ApiPilot.Csrf.Binding.v1|kind|source`.
+- `keyId` selects the key-ring entry that sealed the token, enabling
+  rotation without invalidating in-flight tokens.
 
 ## Binding resolution
 
-`DefaultBindingResolver` resolves in order — never anonymous:
+`DefaultBindingResolver` resolves in order â€” never anonymous:
 
-1. **subject** — authenticated user id (`SubjectExtractor`).
-2. **session** — session id (`SessionExtractor`).
-3. **preauth** — pre-auth source such as a device fingerprint
+1. **subject** â€” authenticated user id (`SubjectExtractor`).
+2. **session** â€” session id (`SessionExtractor`).
+3. **preauth** â€” pre-auth source such as a device fingerprint
    (`PreAuthSource`).
 
 If all resolve to empty, the binding is `null` and CSRF **fails closed**
@@ -34,14 +39,14 @@ If all resolve to empty, the binding is `null` and CSRF **fails closed**
 
 ## Pipeline
 
-1. `GET <BootstrapPath>` (default `/api/csrf`) → issues
+1. `GET <BootstrapPath>` (default `/api/csrf`) â†’ issues
    `{ "success": true, "data": { "token": "..." } }` with
    `Cache-Control: no-store`.
 2. Unsafe methods (`POST`/`PUT`/`PATCH`/`DELETE` by default) require the
    token in `HeaderName` (default `X-CSRF-Token`).
 3. The bootstrap path is **exempt** from validation on every method.
 
-## Validation outcomes → codes
+## Validation outcomes â†’ codes
 
 | Outcome | Code |
 | --- | --- |
@@ -85,14 +90,14 @@ svc := httpapi.NewCsrfService(protector, binding, 7200, 32).
 ```
 
 `RotationStore` is an interface (`GetRotationMarker`,
-`SetRotationMarker`, `ClearRotationMarker`) � back it with Redis or a
+`SetRotationMarker`, `ClearRotationMarker`) — back it with Redis or a
 database for multi-instance deployments. `CsrfService.MarkRotated(fp)`
 records a marker at the current time.
 
 ## Transition listener (`httpapi.CsrfTransitionListener`)
 
 Issues a fresh token on login and clears the rotation marker on logout.
-Never authenticates users or writes cookies � the application owns its
+Never authenticates users or writes cookies — the application owns its
 session lifecycle.
 
 ```go
@@ -105,7 +110,7 @@ listener.OnLogoutWithFingerprint(fp)     // explicit fingerprint variant
 ## Endpoint policy resolver (`httpapi.ResolveEndpointPolicy`)
 
 Combines per-route flags into the effective policy with precedence
-**Require > Skip > UseGlobal** � later flags never override earlier
+**Require > Skip > UseGlobal** — later flags never override earlier
 higher-precedence ones.
 
 ```go
@@ -117,15 +122,15 @@ policy := httpapi.ResolveEndpointPolicy(requireCSRF, skipCSRF)
 
 `CsrfOptions.RotationPolicy` mirrors `CsrfRotationPolicy` (C#):
 
-- `"onBootstrap"` (default) — bootstrap records a rotation marker; tokens
+- `"onBootstrap"` (default) â€” bootstrap records a rotation marker; tokens
   issued before the latest bootstrap validate as `rotated`.
-- `"onWindow"` — same marker semantics; reserved for window-based rotation.
-- `"never"` — no marker is recorded; all unexpired tokens stay valid.
+- `"onWindow"` â€” same marker semantics; reserved for window-based rotation.
+- `"never"` â€” no marker is recorded; all unexpired tokens stay valid.
 
 `CsrfOptions.RotationRequirement` mirrors `CsrfRotationRequirement` (C#):
 
-- `"optional"` (default) — store may be omitted; rotation checks are skipped.
-- `"required"` — `New()` returns an error when `RotationStore` is nil,
+- `"optional"` (default) â€” store may be omitted; rotation checks are skipped.
+- `"required"` â€” `New()` returns an error when `RotationStore` is nil,
   failing fast at startup.
 
 When a store is configured, `CsrfService.ValidateToken` returns

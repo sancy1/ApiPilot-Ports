@@ -1,6 +1,6 @@
 {
   "name": "@apipilot/node",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ApiPilot generic Node adapter: Connect/Express-style middleware over node:http. Works with Express, NestJS (Express), polka, and raw Node http. Framework adapter over @apipilot/core.",
   "license": "Apache-2.0",
   "type": "module",
